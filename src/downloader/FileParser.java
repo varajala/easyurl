@@ -20,7 +20,7 @@ public class FileParser {
     private static final String DELIMETER = "\\|";
     
     
-    private static List<String> readCommandFile(String filepath) throws FileNotFoundException {
+    public static List<String> readCommandFile(String filepath) throws FileNotFoundException {
         List<String> list = new ArrayList<String>();
         File file = new File(filepath);
         Scanner s = new Scanner(file);
@@ -35,7 +35,7 @@ public class FileParser {
      * @param data List of strings as read from the command file
      * @return Arrays of Strings: {command, url, filepath}
      */
-    public List<String[]> parseMultiple(List<String> data) {
+    public static List<String[]> parseMultiple(List<String> data) {
         List<String[]> parsedCommands = new ArrayList<String[]>();
         for (String line : data) {
             String[] parsedCommand = new String[3];
@@ -58,7 +58,7 @@ public class FileParser {
      * @param command Command to be parsed.
      * @return Array of all parts of the command.
      */
-    public Hashtable<String, String> parseCommand(String command) {
+    public static Hashtable<String, String> parseCommand(String command) {
         Hashtable<String, String> results = new Hashtable<String, String>();
         Pattern pattern = Pattern.compile(createExpression());
         Matcher matcher = pattern.matcher(command);

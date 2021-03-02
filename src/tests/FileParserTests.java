@@ -17,30 +17,28 @@ import downloader.FileParser;
  */
 public class FileParserTests {
     
-    FileParser parser = new FileParser();
-    
     /**
      * Test commandline argumetn parsing.
      */
     @Test
     public void testCommandParsing() {
         String command = "get https://www.google.com";
-        Hashtable<String, String> ht = parser.parseCommand(command);
+        Hashtable<String, String> ht = FileParser.parseCommand(command);
         assertEquals(ht.get("command"), "get");
         assertEquals(ht.get("url"), "https://www.google.com");
         
         command = "get    https://www.google.com";
-        ht = parser.parseCommand(command);
+        ht = FileParser.parseCommand(command);
         assertEquals(ht.get("command"), "get");
         assertEquals(ht.get("url"), "https://www.google.com");
         
         command = "    get https://www.google.com  ";
-        ht = parser.parseCommand(command);
+        ht = FileParser.parseCommand(command);
         assertEquals(ht.get("command"), "get");
         assertEquals(ht.get("url"), "https://www.google.com");
         
         command = "get";
-        ht = parser.parseCommand(command);
+        ht = FileParser.parseCommand(command);
         assertEquals(ht.get("command"), null);
         assertEquals(ht.get("url"), null);
     }
@@ -61,7 +59,7 @@ public class FileParserTests {
         expected.add(new String[] {"download", "http://some.url.com", "somefile.txt"});
         expected.add(new String[] {"download", "http://some.url.com", "/home/user/somefile.txt"});
         
-        List<String[]> results = parser.parseMultiple(commands);
+        List<String[]> results = FileParser.parseMultiple(commands);
         for (int i = 0; i < commands.size(); i++) {
             String[] result = results.get(i);
             String[] expectedResult = expected.get(i);
