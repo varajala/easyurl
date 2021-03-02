@@ -19,11 +19,13 @@ public class Downloader {
      * @throws IOException -
      */
     public static void download(String url, String filepath) throws IOException {
-        InputStream data = connect(makeURL(url));
-        FileOutputStream file = openFileStream(filepath);
-        writeDataToFile(data, file);
-        data.close();
-        file.close();
+        try (InputStream data = connect(makeURL(url));
+             FileOutputStream file = openFileStream(filepath))
+        {
+            writeDataToFile(data, file);
+            data.close();
+            file.close();
+        }
     }
     
     private static URL makeURL(String urlString) {
