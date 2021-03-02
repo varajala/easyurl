@@ -7,11 +7,16 @@ package downloader;
  */
 public class Main {
     
+    private static final String url = "";
+    private static final String filepath = "";
+    
     /**
      * @param args Commandline arguments
      */
     public static void main(String[] args) {
-        // TODO
+        System.out.println("Downloading...");
+        Downloader.download(url, filepath);
+        System.out.println("Finished");
     }
     
 }
