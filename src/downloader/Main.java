@@ -1,5 +1,7 @@
 package downloader;
 
+import java.io.IOException;
+
 /**
  * @author varajala
  * @version Mar 2, 2021
@@ -15,7 +17,11 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Downloading...");
-        Downloader.download(url, filepath);
+        try {
+            Downloader.download(url, filepath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Finished");
     }
     

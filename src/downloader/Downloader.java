@@ -10,17 +10,20 @@ import java.io.*;
  */
 public class Downloader {
     
-    private static final int BUF_SIZE = 1024;    
+    private static final int BUF_SIZE = 1024;
     
     /**
      * Download resources from the internet.
      * @param url URL to the resource
      * @param filepath Absolute filepath where the data is written.
+     * @throws IOException -
      */
-    public static void download(String url, String filepath) {
+    public static void download(String url, String filepath) throws IOException {
         InputStream data = connect(makeURL(url));
         FileOutputStream file = openFileStream(filepath);
         writeDataToFile(data, file);
+        data.close();
+        file.close();
     }
     
     private static URL makeURL(String urlString) {
