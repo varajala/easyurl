@@ -30,11 +30,37 @@ public class TestApp {
         String[] cmdArgs = {"--file", "script.txt"};
         cmd.execute(cmdArgs);
         assertEquals(Arrays.toString(log.toArray()), "[EXECUTING script.txt]");
+        clearLog();
+        
+        cmdArgs = new String[] {"script.txt", "--file"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[EXECUTING script.txt]");
+        clearLog();
+        
+        cmdArgs = new String[] {"script.txt", "--file", "some arg"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[ERROR]");
+        clearLog();
+        
+        cmdArgs = new String[] {"--file"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[ERROR]");
+        clearLog();
+        
+        cmdArgs = new String[] {};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[HELP]");
+        clearLog();
     }
     
     
     @Test
     public void testExecutionFromCommandline() {
         //TODO
+    }
+    
+    
+    private void clearLog() {
+        this.log.clear();
     }
 }

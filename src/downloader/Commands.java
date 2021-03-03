@@ -35,7 +35,7 @@ public class Commands {
             System.out.println("ERROR: Execution from a file need exactly two arguments.");
             System.exit(1);
         }
-        String filepath = args[0] != FILE_HANDLE ? args[0]: args[1];
+        String filepath = args[0] == FILE_HANDLE ? args[0]: args[1];
         try {
             List<String> data = FileParser.readCommandFile(filepath);
             List<Hashtable<String, String>> commands = FileParser.parseMultiple(data);
@@ -78,9 +78,9 @@ public class Commands {
         try {
             Downloader.download(url, filepath);
         } catch (IOException e) {
-            System.out.print("FAILED%n");
+            System.out.printf(" FAILED%n");
         }
-        System.out.print("OK%n");
+        System.out.printf(" OK%n");
     }
     
     
