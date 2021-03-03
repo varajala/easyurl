@@ -1,4 +1,4 @@
-package downloader;
+package easyurl;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +17,7 @@ public class FileParser {
      
     private static final String[] EXPRESSIONS = {
             "(?<command>(?<=(\\A|\\s))[a-zA-Z_0-9]+(?=(\\s|\\Z)))",
-            "(?<url>https?://([a-zA-Z0-9]+\\.?/?)+)",
+            "(?<url>https?://([a-zA-Z0-9]+\\.?/?:?)+)",
             "(?<filepath>(?<=(\\s|\\A))(\\w:)?[\\w\\./\\\\]+(?=(\\s|\\Z)))"
     };
     

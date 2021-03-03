@@ -3,8 +3,8 @@ package tests;
 import java.util.Hashtable;
 import java.util.List;
 
-import downloader.Commands;
-import downloader.FileParser;
+import easyurl.Commands;
+import easyurl.FileParser;
 
 
 
@@ -13,7 +13,7 @@ import downloader.FileParser;
  * @version Mar 3, 2021
  *
  */
-public class DummyCommands extends Commands{
+public class DummyCommands extends Commands {
     
     List<String> log;
     
@@ -25,14 +25,14 @@ public class DummyCommands extends Commands{
     }
     
     @Override
-    public void executeDownload(Hashtable<String, String> commandArgs) {
+    public void executeGet(Hashtable<String, String> commandArgs) {
         String url = commandArgs.get("url");
         String filepath = commandArgs.get("filepath");
         if (url == null || filepath == null) {
             log("ERROR");
             return;
         }
-        log(String.format("EXECUTING download %s %s", url, filepath));
+        log(String.format("EXECUTING get %s %s", url, filepath));
     }
     
     
@@ -56,8 +56,8 @@ public class DummyCommands extends Commands{
             return;
         }
         switch (command) {
-            case DOWNLOAD:
-                executeDownload(commandArgs);
+            case GET:
+                executeGet(commandArgs);
                 break;
             default:
                 log("INVALID COMMAND");

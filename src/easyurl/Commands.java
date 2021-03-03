@@ -1,4 +1,4 @@
-package downloader;
+package easyurl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,21 +15,21 @@ public class Commands {
     
     private static final String VERSION = "0.1";
     protected final String FILE_HANDLE = "--file";
-    protected final String DOWNLOAD = "download";
+    protected final String GET = "get";
     
     private final String[] HELP = {
             "=== Welcome to urldownloader version: " + VERSION + " ===\n",
             "Use --file [filepath] to execute all commands in a specified file.\n",
             "Supported commands:",
             "- - - - - - - - - - - -\n\n",
-            "/> download [url] [filepath]\n",
+            "/> GET [url] [filepath]\n",
             
-            "Download the resources from the given URL into the provided filepath.",
+            "Send a GET request to the specified URL and write the recieved data into the provided filepath.",
             "The URL needs to include the scheme used.",
             "Currently only http and https are supported.",
             "The filepath can be relative or absolute and a file is created if it doesn't exist.",
             "Fails if any directories in the path are nonexistent.",
-            "\nEXAMPLE: download https://www.someurl.com/somepackage.jar package.jar\n\n"
+            "\nEXAMPLE: get https://www.someurl.com/somepackage.jar package.jar\n\n"
     };
     
     /**
@@ -85,8 +85,8 @@ public class Commands {
             System.exit(1);
         }
         switch (command) {
-            case DOWNLOAD:
-                executeDownload(commandArgs);
+            case GET:
+                executeGet(commandArgs);
                 break;
             default:
                 System.out.printf("Unidentified command: %s%n", command);
@@ -98,7 +98,7 @@ public class Commands {
      * @param commandArgs -
      *
      */
-    public void executeDownload(Hashtable<String, String> commandArgs) {
+    public void executeGet(Hashtable<String, String> commandArgs) {
         String url = commandArgs.get("url");
         String filepath = commandArgs.get("filepath");
         if (url == null || filepath == null) {
@@ -111,7 +111,7 @@ public class Commands {
         }
         System.out.printf("Downloading %s ...", url);
         try {
-            Downloader.download(url, filepath);
+            Downloader.get(url, filepath);
         } catch (IOException e) {
             System.out.printf(" FAILED%n");
         }

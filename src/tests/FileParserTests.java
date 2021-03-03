@@ -3,9 +3,9 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.Hashtable;
+import easyurl.FileParser;
 
-import downloader.FileParser;
+import java.util.Hashtable;
 
 /**
  * @author varajala
@@ -25,15 +25,22 @@ public class FileParserTests {
         assertEquals(ht.get("url"), "https://www.google.com");
         assertEquals(ht.get("filepath"), "/home/user/somefile.txt");
         
+        
+        command = "get https://127.0.0.1:5000/ /home/user/somefile.txt";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("command"), "get");
+        assertEquals(ht.get("url"), "https://127.0.0.1:5000/");
+        assertEquals(ht.get("filepath"), "/home/user/somefile.txt");
+        
         command = "get";
         ht = FileParser.parseCommand(command);
         assertEquals(ht.get("command"), "get");
         assertEquals(ht.get("url"), null);
         assertEquals(ht.get("filepath"), null);
         
-        command = "  download   http://some.url/resource";
+        command = "  post   http://some.url/resource";
         ht = FileParser.parseCommand(command);
-        assertEquals(ht.get("command"), "download");
+        assertEquals(ht.get("command"), "post");
         assertEquals(ht.get("url"), "http://some.url/resource");
         assertEquals(ht.get("filepath"), null);
         

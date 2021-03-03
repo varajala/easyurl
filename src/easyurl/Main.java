@@ -1,4 +1,4 @@
-package downloader;
+package easyurl;
 
 /**
  * @author varajala

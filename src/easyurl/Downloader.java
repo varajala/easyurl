@@ -1,4 +1,4 @@
-package downloader;
+package easyurl;
 
 import java.net.*;
 import java.io.*;
@@ -18,7 +18,7 @@ public class Downloader {
      * @param filepath Absolute filepath where the data is written.
      * @throws IOException -
      */
-    public static void download(String url, String filepath) throws IOException {
+    public static void get(String url, String filepath) throws IOException {
         try (InputStream data = connect(makeURL(url));
              FileOutputStream file = openFileStream(filepath))
         {
