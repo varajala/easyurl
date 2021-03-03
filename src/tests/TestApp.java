@@ -56,7 +56,35 @@ public class TestApp {
     
     @Test
     public void testExecutionFromCommandline() {
-        //TODO
+        String[] cmdArgs = {"download", "https://some.url.com/resource", "file.txt"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[EXECUTING download https://some.url.com/resource file.txt]");
+        clearLog();
+        
+        cmdArgs = new String[] {"get", "https://some.url.com", "file.txt"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[INVALID COMMAND]");
+        clearLog();
+        
+        cmdArgs = new String[] {"script.txt", "argument"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[INVALID COMMAND]");
+        clearLog();
+        
+        cmdArgs = new String[] {"download", "https://some.url.com/resource"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[ERROR]");
+        clearLog();
+        
+        cmdArgs = new String[] {":download:", "https://some.url.com/resource"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[NO COMMAND]");
+        clearLog();
+        
+        cmdArgs = new String[] {"download", "https:/some.url.com/resource", "file.txt"};
+        cmd.execute(cmdArgs);
+        assertEquals(Arrays.toString(log.toArray()), "[ERROR]");
+        clearLog();
     }
     
     

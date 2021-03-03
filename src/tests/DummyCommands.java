@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import downloader.Commands;
+import downloader.FileParser;
 
 
 
@@ -29,6 +30,7 @@ public class DummyCommands extends Commands{
         String filepath = commandArgs.get("filepath");
         if (url == null || filepath == null) {
             log("ERROR");
+            return;
         }
         log(String.format("EXECUTING download %s %s", url, filepath));
     }
@@ -42,6 +44,25 @@ public class DummyCommands extends Commands{
         }
         String filepath = args[0] != FILE_HANDLE ? args[0]: args[1];
         log(String.format("EXECUTING %s", filepath));
+    }
+    
+    
+    @Override
+    public void executeFromCommandline(String[] args) {
+        Hashtable<String, String> commandArgs = FileParser.parseCommand(String.join(" ", args));
+        String command = commandArgs.get("command");
+        if (command == null) {
+            log("NO COMMAND");
+            return;
+        }
+        switch (command) {
+            case DOWNLOAD:
+                executeDownload(commandArgs);
+                break;
+            default:
+                log("INVALID COMMAND");
+                break;
+        }
     }
     
     

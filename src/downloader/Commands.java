@@ -13,18 +13,38 @@ import java.util.List;
  */
 public class Commands {
     
+    private static final String VERSION = "0.1";
     protected final String FILE_HANDLE = "--file";
     protected final String DOWNLOAD = "download";
+    
+    private final String[] HELP = {
+            "=== Welcome to urldownloader version: " + VERSION + " ===\n",
+            "Use --file [filepath] to execute all commands in a specified file.\n",
+            "Supported commands:",
+            "- - - - - - - - - - - -\n\n",
+            "/> download [url] [filepath]\n",
+            
+            "Download the resources from the given URL into the provided filepath.",
+            "The URL needs to include the scheme used.",
+            "Currently only http and https are supported.",
+            "The filepath can be relative or absolute and a file is created if it doesn't exist.",
+            "Fails if any directories in the path are nonexistent.",
+            "\nEXAMPLE: download https://www.someurl.com/somepackage.jar package.jar\n\n"
+    };
     
     /**
      * @param args -
      */
     public void execute(String[] args) {
-        if (args.length == 0) printHelp();
+        if (args.length == 0) {
+            printHelp();
+            return;
+        }
         if (containsFileHandle(args)) {
             executeFromFile(args);
+            return;
         }
-        // TODO handle commands from commandline
+        executeFromCommandline(args);
     }
     
     /**
@@ -32,7 +52,7 @@ public class Commands {
      */
     public void executeFromFile(String[] args) {
         if (args.length != 2) {
-            System.out.println("ERROR: Execution from a file need exactly two arguments.");
+            System.out.println("ERROR: Execution from a file needs exactly two arguments.");
             System.exit(1);
         }
         String filepath = args[0] == FILE_HANDLE ? args[0]: args[1];
@@ -47,6 +67,16 @@ public class Commands {
             e.printStackTrace();
         }
     }
+    
+    
+    /**
+     * @param args -
+     */
+    public void executeFromCommandline(String[] args) {
+        Hashtable<String, String> parsedCommand = FileParser.parseCommand(String.join(" ", args));
+        decideAction(parsedCommand);
+    }
+    
     
     private void decideAction(Hashtable<String, String> commandArgs) {
         String command = commandArgs.get("command");
@@ -72,7 +102,12 @@ public class Commands {
         String url = commandArgs.get("url");
         String filepath = commandArgs.get("filepath");
         if (url == null || filepath == null) {
-            //TODO handle missing arguments
+            String missingArgument = url == null ? url : filepath;
+            String errorMessage = String.format(
+                    "ERROR: missing or invalid argument %s",
+                    missingArgument);
+            System.out.println(errorMessage);
+            System.exit(1);
         }
         System.out.printf("Downloading %s ...", url);
         try {
@@ -92,9 +127,13 @@ public class Commands {
     }
     
     
+    /**
+     * -
+     */
     public void printHelp() {
-        // TODO
-        System.out.println("No arguments passed...");
+        for (String help : HELP) {
+            System.out.println(help);
+        }
     }
     
 }
