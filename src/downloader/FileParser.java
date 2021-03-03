@@ -14,12 +14,21 @@ import java.util.Scanner;
  * Parse commandline arguments
  */
 public class FileParser {
+     
+    private static final String[] EXPRESSIONS = {
+            "(?<command>(?<=(\\A|\\s))[a-zA-Z_0-9]+(?=(\\s|\\Z)))",
+            "(?<url>https?://([a-zA-Z0-9]+\\.?/?)+)",
+            "(?<filepath>(?<=(\\s|\\A))(\\w:)?[\\w\\./\\\\]+(?=(\\s|\\Z)))"
+    };
     
-    private static String COMMAND_RE = "(?<command>[a-zA-Z_0-9]+)";
-    private static String URL_RE = "(?<url>https?://([a-zA-Z0-9]+\\.?/?)+)";
-    private static final String DELIMETER = "\\|";
+    private static final String[] GROUPS = {"command", "url", "filepath"};
     
     
+    /**
+     * @param filepath -
+     * @return -
+     * @throws FileNotFoundException -
+     */
     public static List<String> readCommandFile(String filepath) throws FileNotFoundException {
         List<String> list = new ArrayList<String>();
         File file = new File(filepath);
@@ -35,20 +44,10 @@ public class FileParser {
      * @param data List of strings as read from the command file
      * @return Arrays of Strings: {command, url, filepath}
      */
-    public static List<String[]> parseMultiple(List<String> data) {
-        List<String[]> parsedCommands = new ArrayList<String[]>();
+    public static List<Hashtable<String, String>> parseMultiple(List<String> data) {
+        List<Hashtable<String, String>> parsedCommands = new ArrayList<Hashtable<String, String>>();
         for (String line : data) {
-            String[] parsedCommand = new String[3];
-            String[] splittedLine = line.split(DELIMETER);
-            String filepath = null;
-            if (splittedLine.length != 2) {
-                // TODO errors
-            }
-            filepath = splittedLine[1].trim();
-            Hashtable<String, String> ht = parseCommand(splittedLine[0]);
-            parsedCommand[0] = ht.get("command");
-            parsedCommand[1] = ht.get("url");
-            parsedCommand[2] = filepath;
+            Hashtable<String, String> parsedCommand = parseCommand(line);
             parsedCommands.add(parsedCommand);
         }
         return parsedCommands;
@@ -63,16 +62,17 @@ public class FileParser {
         Pattern pattern = Pattern.compile(createExpression());
         Matcher matcher = pattern.matcher(command);
         while (matcher.find()) {
-            String cmd = matcher.group("command");
-            String url = matcher.group("url");
-            if (cmd != null) results.put("command", cmd);
-            if (url != null) results.put("url", url);
+            for (String groupName : GROUPS) {
+                String match = matcher.group(groupName);
+                if (match != null) {
+                    results.put(groupName, match);
+                }
+            }
         }
         return results;
     }
     
-    
     private static String createExpression() {
-        return String.format("\\s*%s\\s\\s*%s\\s*", COMMAND_RE, URL_RE);
+        return String.join("|", EXPRESSIONS);
     }
 }
