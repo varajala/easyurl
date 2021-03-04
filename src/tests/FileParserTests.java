@@ -50,4 +50,48 @@ public class FileParserTests {
         assertEquals(ht.get("url"), null);
         assertEquals(ht.get("filepath"), null);
     }
+    
+    
+    @Test
+    public void testURLParsing() {
+        String command = "https://127.0.0.1:5000/";
+        Hashtable<String, String> ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("url"), "https://127.0.0.1:5000/");
+        
+        command = "https://127:0.0.1:5000/";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("url"), null);
+        
+        command = "ftp://some.url/resource";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("url"), null);
+        
+        command = "https://user@host.domain:8000/resource";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("url"), "https://user@host.domain:8000/resource");
+        
+        command = "https://user:password@host.domain:8000/resource";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("url"), "https://user:password@host.domain:8000/resource");
+    }
+    
+    
+    @Test
+    public void testFilepathParsing() {
+        String command = "/home/usr/file.dat";
+        Hashtable<String, String> ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("filepath"), "/home/usr/file.dat");
+        
+        command = "C:Users\\\\username\\\\Documents\\\\file.txt";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("filepath"), "C:Users\\\\username\\\\Documents\\\\file.txt");
+        
+        command = "../../some-file";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("filepath"), "../../some-file");
+        
+        command = "../../some-file?";
+        ht = FileParser.parseCommand(command);
+        assertEquals(ht.get("filepath"), null);
+    }
 }

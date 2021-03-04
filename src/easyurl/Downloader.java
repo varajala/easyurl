@@ -10,8 +10,6 @@ import java.io.*;
  */
 public class Downloader {
     
-    private static final int BUF_SIZE = 1024;
-    
     /**
      * Download resources from the internet.
      * @param url URL to the resource
@@ -62,10 +60,10 @@ public class Downloader {
     
     
     private static void writeDataToFile(InputStream stream, FileOutputStream file) {
-        byte[] buffer = new byte[BUF_SIZE];
         try {
-            while(stream.read(buffer, 0, BUF_SIZE) != -1) {
-                file.write(buffer);
+            int data;
+            while((data = stream.read()) != -1) {
+                file.write(data);
             }
         } catch (IOException e) {
             e.printStackTrace();

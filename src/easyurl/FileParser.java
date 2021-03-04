@@ -14,11 +14,17 @@ import java.util.Scanner;
  * Parse commandline arguments
  */
 public class FileParser {
+    
+    private static String SCHEME_EXP = "https?://";
+    private static String USERINFO_EXP = "([a-zA-Z0-9_]+(:[a-zA-Z0-9_]+)?@)?";
+    private static String HOST_EXP = "[a-zA-Z0-9_\\.-]+(?:\\.[a-zA-Z0-9_\\.-]+)+";
+    private static String PORT_EXP = "(:[0-9]{2,5})?";
+    private static String RESOURCE_EXP = "(/[a-zA-Z0-9_]*/?)?";
      
     private static final String[] EXPRESSIONS = {
             "(?<command>(?<=(\\A|\\s))[a-zA-Z_0-9]+(?=(\\s|\\Z)))",
-            "(?<url>https?://([a-zA-Z0-9]+\\.?/?:?)+)",
-            "(?<filepath>(?<=(\\s|\\A))(\\w:)?[\\w\\./\\\\]+(?=(\\s|\\Z)))"
+            "(?<url>" + SCHEME_EXP + USERINFO_EXP + HOST_EXP + PORT_EXP + RESOURCE_EXP + ")",
+            "(?<filepath>(?<=(\\s|\\A))(\\w:)?[\\w-\\./\\\\]+(?=(\\s|\\Z)))"
     };
     
     private static final String[] GROUPS = {"command", "url", "filepath"};

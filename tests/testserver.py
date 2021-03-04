@@ -22,5 +22,21 @@ def resource_4():
     return '<p>RESOURCE4</p>'
 
 
+def launch_server():
+    try:
+        app.run(port=PORT, debug=True)
+    except OSError:
+        print('Failed to launch the test server...')
+
+
+ENDPOINTS = {
+    'resource1':'<p>RESOURCE1</p>',
+    'resource2':'<p>RESOURCE2</p>',
+    'resource3':'<p>RESOURCE3</p>',
+    'resource4':'<p>RESOURCE4</p>',
+}
+
+
 if __name__ == '__main__':
-    app.run(port=PORT, debug=True)
+    launch_server()
+    
