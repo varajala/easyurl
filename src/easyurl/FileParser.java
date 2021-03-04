@@ -19,7 +19,7 @@ public class FileParser {
     private static String USERINFO_EXP = "([a-zA-Z0-9_]+(:[a-zA-Z0-9_]+)?@)?";
     private static String HOST_EXP = "[a-zA-Z0-9_\\.-]+(?:\\.[a-zA-Z0-9_\\.-]+)+";
     private static String PORT_EXP = "(:[0-9]{2,5})?";
-    private static String RESOURCE_EXP = "(/[a-zA-Z0-9_]*/?)?";
+    private static String RESOURCE_EXP = "(/[a-zA-Z0-9_]*)*([a-zA-Z0-9_\\.-]*)?";
      
     private static final String[] EXPRESSIONS = {
             "(?<command>(?<=(\\A|\\s))[a-zA-Z_0-9]+(?=(\\s|\\Z)))",

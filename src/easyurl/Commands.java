@@ -114,7 +114,7 @@ public class Commands {
             Downloader.get(url, filepath);
             System.out.printf(" OK%n");
         } catch (RequestFailedException e) {
-            System.out.printf(" FAILED - %s", e.getInfo());
+            System.out.printf(" FAILED - %s%n", e.getInfo());
         }
     }
     
