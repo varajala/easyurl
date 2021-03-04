@@ -4,14 +4,14 @@ import java.net.*;
 import java.io.*;
 
 /**
- * @author varajala
- * @version Mar 2, 2021
+ * @author Valtteri Rajalainen
+ * @version 0.1a Mar 4, 2021
  * Download data from and URL.
  */
 public class Requests {
     
     /**
-     * Download resources from the internet.
+     * Send a GET request and write the resulting data to a given file.
      * @param url URL to the resource
      * @param filepath Absolute filepath where the data is written.
      * @throws RequestFailedException -

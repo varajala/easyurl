@@ -6,16 +6,16 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * @author varajala
- * @version Mar 3, 2021
+ * @author Valtteri Rajalainen
+ * @version 0.1a Mar 4, 2021
  * Class that holds all static methods to execute commands based on given input.
  * Subclass this and override the actual execute-methods for testing.
  */
 public class Commands {
     
-    private static final String VERSION = "0.1";
-    protected final String FILE_HANDLE = "--file";
-    protected final String GET = "get";
+    private static final String VERSION = "0.1a";
+    protected static final String FILE_HANDLE = "--file";
+    protected static final String GET = "get";
     
     private final String[] HELP = {
             "=== Welcome to easyurl version: " + VERSION + " ===\n",
@@ -33,7 +33,7 @@ public class Commands {
     };
     
     /**
-     * @param args -
+     * @param args Command line arguments as passed to the main(String[] args).
      */
     public void execute(String[] args) {
         if (args.length == 0) {
@@ -48,7 +48,7 @@ public class Commands {
     }
     
     /**
-     * @param args -
+     * @param args Command line arguments as passed to the main(String[] args).
      */
     public void executeFromFile(String[] args) {
         if (args.length != 2) {
@@ -70,7 +70,7 @@ public class Commands {
     
     
     /**
-     * @param args -
+     * @param args Command line arguments as passed to the main(String[] args).
      */
     public void executeFromCommandline(String[] args) {
         Hashtable<String, String> parsedCommand = Parser.parseCommand(String.join(" ", args));
@@ -95,8 +95,10 @@ public class Commands {
     }
     
     /**
-     * @param commandArgs -
-     *
+     * Execute the get-method from the Requests-class.
+     * @param commandArgs Hastable as produced from Parser.parseCommand.
+     * The arguments of a given command can be retrieved from this hashtable
+     * by the re group as a key.
      */
     public void executeGet(Hashtable<String, String> commandArgs) {
         String url = commandArgs.get("url");
@@ -127,9 +129,8 @@ public class Commands {
     }
     
     
-    /**
-     * -
-     */
+    
+    @SuppressWarnings("javadoc")
     public void printHelp() {
         for (String help : HELP) {
             System.out.println(help);

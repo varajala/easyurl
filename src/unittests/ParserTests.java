@@ -8,8 +8,7 @@ import easyurl.Parser;
 import java.util.Hashtable;
 
 /**
- * @author varajala
- * @version Mar 2, 2021
+ * @author Valtteri Rajalainen
  * Unit tests for CommandParser.
  */
 public class ParserTests {

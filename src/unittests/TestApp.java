@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 
 /**
- * @author varajala
- * @version Mar 3, 2021
+ * @author Valtteri Rajalainen
+ * Dummy application to test command parsing logic.
  */
 public class TestApp {
     

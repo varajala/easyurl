@@ -1,8 +1,8 @@
 package easyurl;
 
 /**
- * @author varajala
- * @version Mar 2, 2021
+ * @author Valtteri Rajalainen
+ * @version 0.1a Mar 2, 2021
  * Main entrypoint to the program.
  */
 public class Main {

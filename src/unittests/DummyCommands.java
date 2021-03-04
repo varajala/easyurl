@@ -9,9 +9,8 @@ import easyurl.Parser;
 
 
 /**
- * @author varajala
- * @version Mar 3, 2021
- *
+ * @author Valtteri Rajalainen
+ * A dummy class for testing the command parsing logic.
  */
 public class DummyCommands extends Commands {
     

@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * @author varajala
- * @version Mar 2, 2021
+ * @author Valtteri Rajalainen
+ * @version 0.1a Mar 4, 2021
  * Parse commandline arguments
  */
 public class Parser {

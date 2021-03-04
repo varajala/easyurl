@@ -1,8 +1,8 @@
 package easyurl;
 
 /**
- * @author varajala
- * @version Mar 4, 2021
+ * @author Valtteri Rajalainen
+ * @version 0.1a Mar 4, 2021
  */
 public class RequestFailedException extends RuntimeException {
     
@@ -20,8 +20,8 @@ public class RequestFailedException extends RuntimeException {
     }
     
     /**
-     * @return Iformation on the exception. 
-     * This can be directly sshow to the user
+     * @return Information on the exception. 
+     * This can be directly shown to the user
      * as an error message.
      */
     public String getInfo() {
