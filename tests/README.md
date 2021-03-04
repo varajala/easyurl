@@ -43,5 +43,3 @@ Microtest is a personal project of mine, which you can get from [here](https://g
 It's a very minimalistic unit testing library.
 
 To run the tests, launch the test server and after it is running execute the main test script.
-
-These tests are addition for unit tests written in JUnit inside the unittests package.
