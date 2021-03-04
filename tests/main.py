@@ -66,7 +66,7 @@ def test_invalid_response():
     url = localhost_url('404')
     filepath = test_filepath('404.dat')
     call_easyurl_get(url, filepath)
-    assert ERROR_R_STREAM.read() == ''
+    assert ERROR_R_STREAM.read() == b''
 
 
 if __name__ == '__main__':

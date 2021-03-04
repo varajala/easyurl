@@ -18,7 +18,7 @@ public class Commands {
     protected final String GET = "get";
     
     private final String[] HELP = {
-            "=== Welcome to urldownloader version: " + VERSION + " ===\n",
+            "=== Welcome to easyurl version: " + VERSION + " ===\n",
             "Use --file [filepath] to execute all commands in a specified file.\n",
             "Supported commands:",
             "- - - - - - - - - - - -\n\n",
@@ -112,10 +112,10 @@ public class Commands {
         System.out.printf("Downloading %s ...", url);
         try {
             Downloader.get(url, filepath);
-        } catch (IOException e) {
-            System.out.printf(" FAILED%n");
+            System.out.printf(" OK%n");
+        } catch (RequestFailedException e) {
+            System.out.printf(" FAILED - %s", e.getInfo());
         }
-        System.out.printf(" OK%n");
     }
     
     

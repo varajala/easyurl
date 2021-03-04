@@ -14,15 +14,18 @@ public class Downloader {
      * Download resources from the internet.
      * @param url URL to the resource
      * @param filepath Absolute filepath where the data is written.
-     * @throws IOException -
+     * @throws RequestFailedException -
      */
-    public static void get(String url, String filepath) throws IOException {
+    public static void get(String url, String filepath) throws RequestFailedException {
         try (InputStream data = connect(makeURL(url));
              FileOutputStream file = openFileStream(filepath))
         {
             writeDataToFile(data, file);
             data.close();
             file.close();
+        } catch (IOException e) {
+            String info = "Unknown error";
+            throw new RequestFailedException(info);
         }
     }
     
@@ -31,18 +34,20 @@ public class Downloader {
         try {
             url = new URL(urlString);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            String info = "Invalid URL";
+            throw new RequestFailedException(info);
         }
         return url;
-    }
+    }    
     
     
     private static InputStream connect(URL url) {
         InputStream stream = null;
         try {
-            stream = new BufferedInputStream(url.openStream());
+            stream = new BufferedInputStream(url.openConnection().getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            String info = "Connection failed";
+            throw new RequestFailedException(info);
         }
         return stream;
     }
@@ -53,7 +58,8 @@ public class Downloader {
         try {
             file = new FileOutputStream(filepath);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            String info = "Invalid filepath. Some directories may be nonexistent.";
+            throw new RequestFailedException(info);
         }
         return file;
     }
@@ -66,7 +72,8 @@ public class Downloader {
                 file.write(data);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            String info = "Error while writing data to the file";
+            throw new RequestFailedException(info);
         }
     }
 }
