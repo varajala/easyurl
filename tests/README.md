@@ -28,18 +28,20 @@ Windows:
 $ python --version
 ```
 
-To install the packages needed, run the following command:
+To install flask, run the following command:
 
 Linux, Mac:
 ```shell
-$ pip3 install -r requirements.txt
+$ pip3 install flask
 ```
 
 On Windows: 
 ```shell
-$ pip install -r requirements.txt
+$ pip install flask
 ```
+Microtest is a personal project of mine, which you can get from [here](https://github.com/varajala/microtest).
+It's a very minimalistic unit testing library.
 
 To run the tests, launch the test server and after it is running execute the main test script.
 
-There's also unit tests made with JUnit.
+These tests are addition for unit tests written in JUnit inside the unittests package.
