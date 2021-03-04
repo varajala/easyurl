@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version Mar 2, 2021
  * Parse commandline arguments
  */
-public class FileParser {
+public class Parser {
     
     private static String SCHEME_EXP = "https?://";
     private static String USERINFO_EXP = "([a-zA-Z0-9_]+(:[a-zA-Z0-9_]+)?@)?";

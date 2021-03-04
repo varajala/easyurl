@@ -22,14 +22,14 @@ public class Commands {
             "Use --file [filepath] to execute all commands in a specified file.\n",
             "Supported commands:",
             "- - - - - - - - - - - -\n\n",
-            "/> GET [url] [filepath]\n",
+            "/> get [url] [filepath]\n",
             
             "Send a GET request to the specified URL and write the recieved data into the provided filepath.",
             "The URL needs to include the scheme used.",
             "Currently only http and https are supported.",
             "The filepath can be relative or absolute and a file is created if it doesn't exist.",
             "Fails if any directories in the path are nonexistent.",
-            "\nEXAMPLE: get https://www.someurl.com/somepackage.jar package.jar\n\n"
+            "\nEXAMPLE: get https://www.someurl.com index.html\n\n"
     };
     
     /**
@@ -57,8 +57,8 @@ public class Commands {
         }
         String filepath = args[0] == FILE_HANDLE ? args[0]: args[1];
         try {
-            List<String> data = FileParser.readCommandFile(filepath);
-            List<Hashtable<String, String>> commands = FileParser.parseMultiple(data);
+            List<String> data = Parser.readCommandFile(filepath);
+            List<Hashtable<String, String>> commands = Parser.parseMultiple(data);
             for (Hashtable<String, String> commandArgs : commands) {
                 decideAction(commandArgs);
             }
@@ -73,7 +73,7 @@ public class Commands {
      * @param args -
      */
     public void executeFromCommandline(String[] args) {
-        Hashtable<String, String> parsedCommand = FileParser.parseCommand(String.join(" ", args));
+        Hashtable<String, String> parsedCommand = Parser.parseCommand(String.join(" ", args));
         decideAction(parsedCommand);
     }
     
@@ -111,7 +111,7 @@ public class Commands {
         }
         System.out.printf("Downloading %s ...", url);
         try {
-            Downloader.get(url, filepath);
+            Requests.get(url, filepath);
             System.out.printf(" OK%n");
         } catch (RequestFailedException e) {
             System.out.printf(" FAILED - %s%n", e.getInfo());

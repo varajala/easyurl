@@ -8,7 +8,7 @@ import java.io.*;
  * @version Mar 2, 2021
  * Download data from and URL.
  */
-public class Downloader {
+public class Requests {
     
     /**
      * Download resources from the internet.

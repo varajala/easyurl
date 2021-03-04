@@ -1,10 +1,10 @@
-package tests;
+package unittests;
 
 import java.util.Hashtable;
 import java.util.List;
 
 import easyurl.Commands;
-import easyurl.FileParser;
+import easyurl.Parser;
 
 
 
@@ -49,7 +49,7 @@ public class DummyCommands extends Commands {
     
     @Override
     public void executeFromCommandline(String[] args) {
-        Hashtable<String, String> commandArgs = FileParser.parseCommand(String.join(" ", args));
+        Hashtable<String, String> commandArgs = Parser.parseCommand(String.join(" ", args));
         String command = commandArgs.get("command");
         if (command == null) {
             log("NO COMMAND");
