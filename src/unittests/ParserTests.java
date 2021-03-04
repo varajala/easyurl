@@ -72,10 +72,6 @@ public class ParserTests {
         command = "https://user:password@host.domain:8000/resource";
         ht = Parser.parseCommand(command);
         assertEquals(ht.get("url"), "https://user:password@host.domain:8000/resource");
-        
-        command = "https://svn.cc.jyu.fi/srv/svn/ohj2/FXExamples/trunk/FXGui/fxgui.jar";
-        ht = Parser.parseCommand(command);
-        assertEquals(ht.get("url"), "https://svn.cc.jyu.fi/srv/svn/ohj2/FXExamples/trunk/FXGui/fxgui.jar");
     }
     
     
