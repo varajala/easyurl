@@ -1,9 +1,7 @@
-package unittests;
+package easyurl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-
-import easyurl.Parser;
 
 import java.util.Hashtable;
 

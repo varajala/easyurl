@@ -1,8 +1,9 @@
-package unittests;
+package easyurl;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.Test;
-import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,14 @@ import java.util.Arrays;
  * @author Valtteri Rajalainen
  * Dummy application to test command parsing logic.
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestApp {
     
     DummyCommands cmd;
     List<String> log = new ArrayList<String>();
     
 
-    @Before
+    @BeforeAll
     public void setupTestApplication() {
         this.cmd = new DummyCommands(this.log);
     }

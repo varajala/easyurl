@@ -1,7 +1,6 @@
 package easyurl;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 

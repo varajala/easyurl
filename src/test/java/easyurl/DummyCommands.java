@@ -1,11 +1,7 @@
-package unittests;
+package easyurl;
 
 import java.util.Hashtable;
 import java.util.List;
-
-import easyurl.Commands;
-import easyurl.Parser;
-
 
 
 /**
