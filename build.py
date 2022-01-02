@@ -34,7 +34,6 @@ def do_build():
     # To build and run:
     # build.build_and_run(options = options, build_path = ROOT_DIR, run_path = BIN_DIRECTORY)
     
-    # To build, run tests and run application:
     success = build.build_only(options = options, path = ROOT_DIRECTORY)
     if not success:
         return
