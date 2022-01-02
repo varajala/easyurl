@@ -5,7 +5,7 @@ import java.io.*;
 
 /**
  * @author Valtteri Rajalainen
- * @version 0.1a Mar 4, 2021
+ * @version 1.0.0 Jan 2, 2022
  * Download data from and URL.
  */
 public class Requests {

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * @author Valtteri Rajalainen
- * @version 0.1a Mar 4, 2021
+ * @version 1.0.0 Jan 2, 2022
  * Parse commandline arguments
  */
 public class Parser {

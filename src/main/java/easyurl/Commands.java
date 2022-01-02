@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author Valtteri Rajalainen
- * @version 0.1a Mar 4, 2021
+ * @version 1.0.0 Jan 2, 2022
  * Class that holds all static methods to execute commands based on given input.
  * Subclass this and override the actual execute-methods for testing.
  */

@@ -48,7 +48,7 @@ def do_build():
         )
 
     build.create_jar(
-        output_jar = f'easyurl.{VERSION}.jar',
+        output_jar = f'easyurl-{VERSION}.jar',
         class_files = [
             'easyurl/Main.class',
             'easyurl/Requests.class',

@@ -2,7 +2,7 @@ package easyurl;
 
 /**
  * @author Valtteri Rajalainen
- * @version 0.1a Mar 4, 2021
+ * @version 1.0.0 Jan 2, 2022
  */
 public class RequestFailedException extends RuntimeException {
     
