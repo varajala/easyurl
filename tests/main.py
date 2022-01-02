@@ -20,6 +20,7 @@ def call_easyurl(*args) -> str:
     proc = subp.run(cmd, capture_output=True, text=True)
     return proc.stdout
 
+
 @microtest.setup
 def setup():
     if not os.path.exists(EASYURL_JAR_PATH):
